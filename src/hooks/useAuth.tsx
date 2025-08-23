@@ -26,6 +26,7 @@ interface AuthContextType {
   signIn: (email: string, password: string) => Promise<{ error?: Error }>;
   signOut: () => Promise<void>;
   updateProfile: (updates: Partial<UserProfile>) => Promise<{ error?: Error }>;
+  demoLogin: (role: UserRole) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -225,6 +226,55 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const demoLogin = async (role: UserRole) => {
+    try {
+      // Create mock user and profile for demo purposes
+      const mockUser = {
+        id: `demo-${role.toLowerCase()}`,
+        email: `${role.toLowerCase()}@demo.com`,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      } as User;
+
+      const mockProfile: UserProfile = {
+        id: `profile-${role.toLowerCase()}`,
+        user_id: mockUser.id,
+        school_id: '00000000-0000-0000-0000-000000000001',
+        role: role,
+        first_name: role === 'ADMIN' ? 'Admin' : role === 'TEACHER' ? 'Sarah' : 'John',
+        last_name: role === 'ADMIN' ? 'User' : role === 'TEACHER' ? 'Teacher' : 'Johnson',
+        email: `${role.toLowerCase()}@demo.com`,
+      };
+
+      const mockSession = {
+        user: mockUser,
+        access_token: 'demo-token',
+        token_type: 'bearer',
+        expires_in: 3600,
+        expires_at: Math.floor(Date.now() / 1000) + 3600,
+        refresh_token: 'demo-refresh',
+      } as Session;
+
+      // Set the mock data
+      setUser(mockUser);
+      setProfile(mockProfile);
+      setSession(mockSession);
+      setLoading(false);
+
+      toast({
+        title: 'Demo Login Successful',
+        description: `Welcome to the ${role} portal!`,
+      });
+    } catch (error) {
+      console.error('Demo login error:', error);
+      toast({
+        variant: 'destructive',
+        title: 'Demo Login Failed',
+        description: 'Unable to access demo mode.',
+      });
+    }
+  };
+
   const value: AuthContextType = {
     user,
     profile,
@@ -234,6 +284,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     signIn,
     signOut,
     updateProfile,
+    demoLogin,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

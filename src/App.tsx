@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "@/hooks/useAuth";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { PortalLayout } from "@/components/layout/PortalLayout";
+import { DemoLogin } from "@/components/auth/DemoLogin";
 import { getPortalHome, canAccessRoute } from "@/utils/routes";
 
 // Portal Pages
@@ -43,7 +44,7 @@ const PortalRouter = () => {
     return <Navigate to={getPortalHome(profile.role)} replace />;
   }
 
-  return <div className="min-h-screen flex items-center justify-center">Please sign in</div>;
+  return <DemoLogin />;
 };
 
 const App = () => (
