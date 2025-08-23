@@ -19,4 +19,16 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  optimizeDeps: {
+    include: ['react-is', 'recharts'],
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'recharts-vendor': ['recharts', 'react-is'],
+        },
+      },
+    },
+  },
 }));
