@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { useAuth, UserRole } from '@/hooks/useAuth';
-import { AuthForm } from './AuthForm';
+import { DemoLogin } from './DemoLogin';
 import { Loader2 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 
@@ -26,7 +26,7 @@ export const ProtectedRoute = ({ children, allowedRoles }: ProtectedRouteProps) 
   }
 
   if (!user || !profile) {
-    return <AuthForm />;
+    return <DemoLogin />;
   }
 
   // Check role access if specific roles are required

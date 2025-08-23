@@ -74,7 +74,7 @@ export const DemoLogin = () => {
               </div>
             </Button>
 
-            {/* Parent Login */}
+            {/* Student/Parent Login */}
             <Button
               onClick={() => handleDemoLogin('PARENT')}
               variant="outline"
@@ -84,12 +84,12 @@ export const DemoLogin = () => {
                 <Users className="h-8 w-8 text-green-600" />
               </div>
               <div className="text-center">
-                <h3 className="font-semibold text-lg">Login as Parent</h3>
+                <h3 className="font-semibold text-lg">Login as Student</h3>
                 <p className="text-sm text-muted-foreground mt-1">
-                  Monitor child's progress
+                  View progress & assignments
                 </p>
                 <Badge variant="secondary" className="mt-2">
-                  Parent Portal
+                  Student Portal
                 </Badge>
               </div>
             </Button>
@@ -105,7 +105,7 @@ export const DemoLogin = () => {
                 <strong>Teacher:</strong> Attendance, assignments, grades
               </div>
               <div>
-                <strong>Parent:</strong> View progress, pay fees, appointments
+                <strong>Student:</strong> View progress, pay fees, assignments
               </div>
             </div>
           </div>
