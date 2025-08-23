@@ -14,90 +14,264 @@ import {
   ChevronRight,
   Bell,
   FileText,
-  MapPin
+  MapPin,
+  School,
+  UserCheck,
+  BookOpenCheck,
+  Clock,
+  TrendingUp,
+  CreditCard
 } from "lucide-react";
 import { NavLink, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/hooks/useAuth";
+import { ROUTES } from "@/utils/routes";
 
-const navigationItems = [
-  {
-    title: "Dashboard",
-    href: "/",
-    icon: Home,
-    color: "text-primary"
-  },
-  {
-    title: "Calendar",
-    href: "/calendar",
-    icon: Calendar,
-    color: "text-primary"
-  },
-  {
-    title: "Timetable",
-    href: "/timetable",
-    icon: ClipboardList,
-    color: "text-accent-math"
-  },
-  {
-    title: "Students",
-    href: "/students",
-    icon: Users,
-    color: "text-secondary"
-  },
-  {
-    title: "Teachers",
-    href: "/teachers",
-    icon: GraduationCap,
-    color: "text-accent-science"
-  },
-  {
-    title: "Assignments",
-    href: "/assignments",
-    icon: BookOpen,
-    color: "text-accent-arts"
-  },
-  {
-    title: "Exams",
-    href: "/exams",
-    icon: FileText,
-    color: "text-destructive"
-  },
-  {
-    title: "Attendance",
-    href: "/attendance",
-    icon: ClipboardList,
-    color: "text-warning"
-  },
-  {
-    title: "Fees",
-    href: "/fees",
-    icon: DollarSign,
-    color: "text-success"
-  },
-  {
-    title: "Messages",
-    href: "/messages",
-    icon: MessageSquare,
-    color: "text-info"
-  },
-  {
-    title: "Analytics",
-    href: "/analytics",
-    icon: BarChart3,
-    color: "text-accent-arts"
-  },
-  {
-    title: "Settings",
-    href: "/settings",
-    icon: Settings,
-    color: "text-muted-foreground"
+// Navigation items based on user role
+const getNavigationItems = (role: string) => {
+  const commonItems = [
+    {
+      title: "Dashboard",
+      href: role === 'ADMIN' ? ROUTES.ADMIN.HOME : role === 'TEACHER' ? ROUTES.TEACHER.HOME : ROUTES.PARENT.HOME,
+      icon: Home,
+      color: "text-primary"
+    },
+  ];
+
+  if (role === 'ADMIN') {
+    return [
+      ...commonItems,
+      {
+        title: "Users & Roles",
+        href: ROUTES.ADMIN.USERS,
+        icon: Users,
+        color: "text-secondary"
+      },
+      {
+        title: "Classes",
+        href: ROUTES.ADMIN.CLASSES,
+        icon: School,
+        color: "text-accent-science"
+      },
+      {
+        title: "Subjects",
+        href: ROUTES.ADMIN.SUBJECTS,
+        icon: BookOpen,
+        color: "text-accent-arts"
+      },
+      {
+        title: "Timetable",
+        href: ROUTES.ADMIN.TIMETABLE,
+        icon: ClipboardList,
+        color: "text-accent-math"
+      },
+      {
+        title: "Attendance",
+        href: ROUTES.ADMIN.ATTENDANCE,
+        icon: UserCheck,
+        color: "text-warning"
+      },
+      {
+        title: "Assessments",
+        href: ROUTES.ADMIN.ASSESSMENTS,
+        icon: BookOpenCheck,
+        color: "text-destructive"
+      },
+      {
+        title: "Homework",
+        href: ROUTES.ADMIN.HOMEWORK,
+        icon: FileText,
+        color: "text-info"
+      },
+      {
+        title: "Materials",
+        href: ROUTES.ADMIN.MATERIALS,
+        icon: BookOpen,
+        color: "text-accent-arts"
+      },
+      {
+        title: "Announcements",
+        href: ROUTES.ADMIN.ANNOUNCEMENTS,
+        icon: Bell,
+        color: "text-primary"
+      },
+      {
+        title: "Fees & Invoices",
+        href: ROUTES.ADMIN.FEES,
+        icon: CreditCard,
+        color: "text-success"
+      },
+      {
+        title: "Appointments",
+        href: ROUTES.ADMIN.APPOINTMENTS,
+        icon: Calendar,
+        color: "text-primary"
+      },
+      {
+        title: "Complaints",
+        href: ROUTES.ADMIN.COMPLAINTS,
+        icon: MessageSquare,
+        color: "text-warning"
+      },
+      {
+        title: "Analytics",
+        href: ROUTES.ADMIN.ANALYTICS,
+        icon: BarChart3,
+        color: "text-accent-arts"
+      },
+      {
+        title: "Settings",
+        href: ROUTES.ADMIN.SETTINGS,
+        icon: Settings,
+        color: "text-muted-foreground"
+      }
+    ];
   }
-];
+
+  if (role === 'TEACHER') {
+    return [
+      ...commonItems,
+      {
+        title: "My Classes",
+        href: ROUTES.TEACHER.CLASSES,
+        icon: School,
+        color: "text-secondary"
+      },
+      {
+        title: "Attendance",
+        href: ROUTES.TEACHER.ATTENDANCE,
+        icon: UserCheck,
+        color: "text-warning"
+      },
+      {
+        title: "Assessments",
+        href: ROUTES.TEACHER.ASSESSMENTS,
+        icon: BookOpenCheck,
+        color: "text-destructive"
+      },
+      {
+        title: "Homework",
+        href: ROUTES.TEACHER.HOMEWORK,
+        icon: FileText,
+        color: "text-info"
+      },
+      {
+        title: "Materials",
+        href: ROUTES.TEACHER.MATERIALS,
+        icon: BookOpen,
+        color: "text-accent-arts"
+      },
+      {
+        title: "Announcements",
+        href: ROUTES.TEACHER.ANNOUNCEMENTS,
+        icon: Bell,
+        color: "text-primary"
+      },
+      {
+        title: "Appointments",
+        href: ROUTES.TEACHER.APPOINTMENTS,
+        icon: Calendar,
+        color: "text-primary"
+      },
+      {
+        title: "Messages",
+        href: ROUTES.TEACHER.MESSAGES,
+        icon: MessageSquare,
+        color: "text-info"
+      },
+      {
+        title: "Calendar",
+        href: ROUTES.TEACHER.CALENDAR,
+        icon: Calendar,
+        color: "text-accent-math"
+      }
+    ];
+  }
+
+  if (role === 'PARENT') {
+    return [
+      ...commonItems,
+      {
+        title: "Attendance",
+        href: ROUTES.PARENT.ATTENDANCE,
+        icon: UserCheck,
+        color: "text-warning"
+      },
+      {
+        title: "Marks & Results",
+        href: ROUTES.PARENT.MARKS,
+        icon: TrendingUp,
+        color: "text-destructive"
+      },
+      {
+        title: "Homework & Materials",
+        href: ROUTES.PARENT.HOMEWORK,
+        icon: BookOpen,
+        color: "text-accent-arts"
+      },
+      {
+        title: "Announcements",
+        href: ROUTES.PARENT.ANNOUNCEMENTS,
+        icon: Bell,
+        color: "text-primary"
+      },
+      {
+        title: "Appointments",
+        href: ROUTES.PARENT.APPOINTMENTS,
+        icon: Calendar,
+        color: "text-primary"
+      },
+      {
+        title: "Fees & Payments",
+        href: ROUTES.PARENT.FEES,
+        icon: CreditCard,
+        color: "text-success"
+      },
+      {
+        title: "Messages",
+        href: ROUTES.PARENT.MESSAGES,
+        icon: MessageSquare,
+        color: "text-info"
+      },
+      {
+        title: "Calendar",
+        href: ROUTES.PARENT.CALENDAR,
+        icon: Calendar,
+        color: "text-accent-math"
+      }
+    ];
+  }
+
+  // Default navigation for non-authenticated users
+  return [
+    {
+      title: "Dashboard",
+      href: "/",
+      icon: Home,
+      color: "text-primary"
+    },
+    {
+      title: "Calendar",
+      href: "/calendar",
+      icon: Calendar,
+      color: "text-primary"
+    },
+    {
+      title: "Timetable",
+      href: "/timetable",
+      icon: ClipboardList,
+      color: "text-accent-math"
+    }
+  ];
+};
 
 export function AppSidebar() {
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
+  const { profile } = useAuth();
+  
+  const navigationItems = getNavigationItems(profile?.role || 'GUEST');
 
   const isActive = (path: string) => {
     if (path === "/") {
