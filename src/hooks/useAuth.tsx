@@ -266,6 +266,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         title: 'Demo Login Successful',
         description: `Welcome to the ${role} portal!`,
       });
+
+      // Redirect to the appropriate portal
+      setTimeout(() => {
+        const portalRoutes = {
+          'ADMIN': '/admin',
+          'TEACHER': '/teacher',
+          'PARENT': '/student',
+          'STUDENT': '/student'
+        };
+        window.location.href = portalRoutes[role];
+      }, 500);
     } catch (error) {
       console.error('Demo login error:', error);
       toast({
