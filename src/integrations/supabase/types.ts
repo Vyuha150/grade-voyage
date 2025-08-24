@@ -1209,7 +1209,7 @@ export type Database = {
       appointment_status: "PENDING" | "CONFIRMED" | "COMPLETED" | "CANCELLED"
       complaint_status: "OPEN" | "IN_PROGRESS" | "RESOLVED" | "CLOSED"
       payment_status: "PENDING" | "COMPLETED" | "FAILED" | "REFUNDED"
-      user_role: "ADMIN" | "TEACHER" | "PARENT" | "STUDENT"
+      user_role: "ADMIN" | "TEACHER" | "PARENT"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -1340,7 +1340,7 @@ export const Constants = {
       appointment_status: ["PENDING", "CONFIRMED", "COMPLETED", "CANCELLED"],
       complaint_status: ["OPEN", "IN_PROGRESS", "RESOLVED", "CLOSED"],
       payment_status: ["PENDING", "COMPLETED", "FAILED", "REFUNDED"],
-      user_role: ["ADMIN", "TEACHER", "PARENT", "STUDENT"],
+      user_role: ["ADMIN", "TEACHER", "PARENT"],
     },
   },
 } as const

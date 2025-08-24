@@ -19,13 +19,6 @@ import { AdminAssessmentsPage } from "./pages/admin/AdminAssessmentsPage";
 import TeacherDashboard from "./pages/teacher/TeacherDashboard";
 import TeacherHomeworkPage from "./pages/teacher/TeacherHomeworkPage";
 
-// Student pages
-import StudentDashboard from "./pages/student/StudentDashboard";
-import StudentAttendancePage from "./pages/student/StudentAttendancePage";
-import StudentMarksPage from "./pages/student/StudentMarksPage";
-import StudentHomeworkPage from "./pages/student/StudentHomeworkPage";
-import StudentFeesPage from "./pages/student/StudentFeesPage";
-
 // Route Guard Component
 const RouteGuard = ({ children, path }: { children: React.ReactNode; path: string }) => {
   const { profile } = useAuth();
@@ -284,28 +277,28 @@ const App = () => (
       <Route path={ROUTES.STUDENT.HOME} element={
         <RouteGuard path={ROUTES.STUDENT.HOME}>
           <ProtectedRoute allowedRoles={['STUDENT', 'PARENT']}>
-            <PortalLayout><StudentDashboard /></PortalLayout>
+            <PortalLayout><PlaceholderPage title="Student Dashboard" description="Your academic overview" /></PortalLayout>
           </ProtectedRoute>
         </RouteGuard>
       } />
       <Route path={ROUTES.STUDENT.ATTENDANCE} element={
         <RouteGuard path={ROUTES.STUDENT.ATTENDANCE}>
           <ProtectedRoute allowedRoles={['STUDENT', 'PARENT']}>
-            <PortalLayout><StudentAttendancePage /></PortalLayout>
+            <PortalLayout><PlaceholderPage title="Attendance" description="View attendance records" /></PortalLayout>
           </ProtectedRoute>
         </RouteGuard>
       } />
       <Route path={ROUTES.STUDENT.MARKS} element={
         <RouteGuard path={ROUTES.STUDENT.MARKS}>
           <ProtectedRoute allowedRoles={['STUDENT', 'PARENT']}>
-            <PortalLayout><StudentMarksPage /></PortalLayout>
+            <PortalLayout><PlaceholderPage title="Marks & Results" description="View grades and reports" /></PortalLayout>
           </ProtectedRoute>
         </RouteGuard>
       } />
       <Route path={ROUTES.STUDENT.HOMEWORK_MATERIALS} element={
         <RouteGuard path={ROUTES.STUDENT.HOMEWORK_MATERIALS}>
           <ProtectedRoute allowedRoles={['STUDENT', 'PARENT']}>
-            <PortalLayout><StudentHomeworkPage /></PortalLayout>
+            <PortalLayout><PlaceholderPage title="Homework & Materials" description="Access assignments and resources" /></PortalLayout>
           </ProtectedRoute>
         </RouteGuard>
       } />
@@ -326,7 +319,7 @@ const App = () => (
       <Route path={ROUTES.STUDENT.FEES} element={
         <RouteGuard path={ROUTES.STUDENT.FEES}>
           <ProtectedRoute allowedRoles={['STUDENT', 'PARENT']}>
-            <PortalLayout><StudentFeesPage /></PortalLayout>
+            <PortalLayout><PlaceholderPage title="Fees & Payments" description="Manage school fees and payments" /></PortalLayout>
           </ProtectedRoute>
         </RouteGuard>
       } />

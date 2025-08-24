@@ -192,10 +192,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     if (!user || !profile) return { error: new Error('No user logged in') };
 
     try {
-      // Cast the updates to match the current Supabase types
       const { error } = await supabase
         .from('profiles')
-        .update(updates as any) // Type cast to handle enum mismatch until types are regenerated
+        .update(updates)
         .eq('user_id', user.id);
 
       if (error) {
@@ -242,8 +241,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         user_id: mockUser.id,
         school_id: '00000000-0000-0000-0000-000000000001',
         role: role,
-        first_name: role === 'ADMIN' ? 'Admin' : role === 'TEACHER' ? 'Sarah' : role === 'STUDENT' ? 'Alice' : 'John',
-        last_name: role === 'ADMIN' ? 'User' : role === 'TEACHER' ? 'Teacher' : role === 'STUDENT' ? 'Student' : 'Johnson',
+        first_name: role === 'ADMIN' ? 'Admin' : role === 'TEACHER' ? 'Sarah' : 'John',
+        last_name: role === 'ADMIN' ? 'User' : role === 'TEACHER' ? 'Teacher' : 'Johnson',
         email: `${role.toLowerCase()}@demo.com`,
       };
 
@@ -266,17 +265,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         title: 'Demo Login Successful',
         description: `Welcome to the ${role} portal!`,
       });
-
-      // Redirect to the appropriate portal
-      setTimeout(() => {
-        const portalRoutes = {
-          'ADMIN': '/admin',
-          'TEACHER': '/teacher',
-          'PARENT': '/student',
-          'STUDENT': '/student'
-        };
-        window.location.href = portalRoutes[role];
-      }, 500);
     } catch (error) {
       console.error('Demo login error:', error);
       toast({
