@@ -99,8 +99,8 @@ export const AssessmentsTable = ({ searchQuery, subjectFilter, termFilter, statu
     const matchesSearch = assessment.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          assessment.teacher.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          assessment.class.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesSubject = !subjectFilter || assessment.subject.toLowerCase() === subjectFilter;
-    const matchesStatus = !statusFilter || assessment.status === statusFilter;
+    const matchesSubject = subjectFilter === 'all' || assessment.subject.toLowerCase() === subjectFilter;
+    const matchesStatus = statusFilter === 'all' || assessment.status === statusFilter;
     
     return matchesSearch && matchesSubject && matchesStatus;
   });
@@ -153,7 +153,7 @@ export const AssessmentsTable = ({ searchQuery, subjectFilter, termFilter, statu
           <div className="text-center">
             <h3 className="text-lg font-semibold mb-2">No assessments found</h3>
             <p className="text-muted-foreground mb-4">
-              {searchQuery || subjectFilter || statusFilter
+              {searchQuery || subjectFilter !== 'all' || statusFilter !== 'all'
                 ? "Try adjusting your filters to find assessments."
                 : "Create your first assessment to get started."}
             </p>

@@ -14,9 +14,9 @@ import { Plus, FileText, Eye, Search } from 'lucide-react';
 
 export const AdminAssessmentsPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [subjectFilter, setSubjectFilter] = useState('');
-  const [termFilter, setTermFilter] = useState('');
-  const [statusFilter, setStatusFilter] = useState('');
+  const [subjectFilter, setSubjectFilter] = useState('all');
+  const [termFilter, setTermFilter] = useState('all');
+  const [statusFilter, setStatusFilter] = useState('all');
   const [createDialogOpen, setCreateDialogOpen] = useState(false);
   const [templatesDialogOpen, setTemplatesDialogOpen] = useState(false);
   const [moderationDialogOpen, setModerationDialogOpen] = useState(false);
@@ -90,7 +90,7 @@ export const AdminAssessmentsPage = () => {
                 <SelectValue placeholder="Filter by subject" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All Subjects</SelectItem>
+                <SelectItem value="all">All Subjects</SelectItem>
                 <SelectItem value="mathematics">Mathematics</SelectItem>
                 <SelectItem value="english">English</SelectItem>
                 <SelectItem value="science">Science</SelectItem>
@@ -103,7 +103,7 @@ export const AdminAssessmentsPage = () => {
                 <SelectValue placeholder="Filter by term" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All Terms</SelectItem>
+                <SelectItem value="all">All Terms</SelectItem>
                 <SelectItem value="term1">Term 1</SelectItem>
                 <SelectItem value="term2">Term 2</SelectItem>
                 <SelectItem value="term3">Term 3</SelectItem>
@@ -114,7 +114,7 @@ export const AdminAssessmentsPage = () => {
                 <SelectValue placeholder="Filter by status" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All Status</SelectItem>
+                <SelectItem value="all">All Status</SelectItem>
                 <SelectItem value="draft">Draft</SelectItem>
                 <SelectItem value="active">Active</SelectItem>
                 <SelectItem value="completed">Completed</SelectItem>

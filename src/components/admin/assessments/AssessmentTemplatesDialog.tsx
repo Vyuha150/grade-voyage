@@ -85,14 +85,14 @@ const mockTemplates = [
 
 export const AssessmentTemplatesDialog = ({ open, onOpenChange }: AssessmentTemplatesDialogProps) => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [subjectFilter, setSubjectFilter] = useState('');
-  const [typeFilter, setTypeFilter] = useState('');
+  const [subjectFilter, setSubjectFilter] = useState('all');
+  const [typeFilter, setTypeFilter] = useState('all');
 
   const filteredTemplates = mockTemplates.filter(template => {
     const matchesSearch = template.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          template.description.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesSubject = !subjectFilter || template.subject.toLowerCase() === subjectFilter;
-    const matchesType = !typeFilter || template.type === typeFilter;
+    const matchesSubject = subjectFilter === 'all' || template.subject.toLowerCase() === subjectFilter;
+    const matchesType = typeFilter === 'all' || template.type === typeFilter;
     
     return matchesSearch && matchesSubject && matchesType;
   });
@@ -157,7 +157,7 @@ export const AssessmentTemplatesDialog = ({ open, onOpenChange }: AssessmentTemp
                   <SelectValue placeholder="Filter by subject" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All Subjects</SelectItem>
+                  <SelectItem value="all">All Subjects</SelectItem>
                   <SelectItem value="general">General</SelectItem>
                   <SelectItem value="mathematics">Mathematics</SelectItem>
                   <SelectItem value="english">English</SelectItem>
@@ -170,7 +170,7 @@ export const AssessmentTemplatesDialog = ({ open, onOpenChange }: AssessmentTemp
                   <SelectValue placeholder="Filter by type" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All Types</SelectItem>
+                  <SelectItem value="all">All Types</SelectItem>
                   <SelectItem value="quiz">Quiz</SelectItem>
                   <SelectItem value="test">Test</SelectItem>
                   <SelectItem value="assignment">Assignment</SelectItem>
