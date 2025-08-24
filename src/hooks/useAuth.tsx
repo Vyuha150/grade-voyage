@@ -192,9 +192,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     if (!user || !profile) return { error: new Error('No user logged in') };
 
     try {
+      // Cast the updates to match the current Supabase types
       const { error } = await supabase
         .from('profiles')
-        .update(updates)
+        .update(updates as any) // Type cast to handle enum mismatch until types are regenerated
         .eq('user_id', user.id);
 
       if (error) {
@@ -241,8 +242,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         user_id: mockUser.id,
         school_id: '00000000-0000-0000-0000-000000000001',
         role: role,
-        first_name: role === 'ADMIN' ? 'Admin' : role === 'TEACHER' ? 'Sarah' : 'John',
-        last_name: role === 'ADMIN' ? 'User' : role === 'TEACHER' ? 'Teacher' : 'Johnson',
+        first_name: role === 'ADMIN' ? 'Admin' : role === 'TEACHER' ? 'Sarah' : role === 'STUDENT' ? 'Alice' : 'John',
+        last_name: role === 'ADMIN' ? 'User' : role === 'TEACHER' ? 'Teacher' : role === 'STUDENT' ? 'Student' : 'Johnson',
         email: `${role.toLowerCase()}@demo.com`,
       };
 
