@@ -33,7 +33,7 @@ const getNavigationItems = (role: string) => {
   const commonItems = [
     {
       title: "Dashboard",
-      href: role === 'ADMIN' ? ROUTES.ADMIN.HOME : role === 'TEACHER' ? ROUTES.TEACHER.HOME : ROUTES.PARENT.HOME,
+      href: role === 'ADMIN' ? ROUTES.ADMIN.HOME : role === 'TEACHER' ? ROUTES.TEACHER.HOME : ROUTES.STUDENT.HOME,
       icon: Home,
       color: "text-primary"
     },
@@ -189,54 +189,54 @@ const getNavigationItems = (role: string) => {
     ];
   }
 
-  if (role === 'PARENT') {
+  if (role === 'PARENT' || role === 'STUDENT') {
     return [
       ...commonItems,
       {
         title: "Attendance",
-        href: ROUTES.PARENT.ATTENDANCE,
+        href: ROUTES.STUDENT.ATTENDANCE,
         icon: UserCheck,
         color: "text-warning"
       },
       {
         title: "Marks & Results",
-        href: ROUTES.PARENT.MARKS,
+        href: ROUTES.STUDENT.MARKS,
         icon: TrendingUp,
         color: "text-destructive"
       },
       {
         title: "Homework & Materials",
-        href: ROUTES.PARENT.HOMEWORK,
+        href: ROUTES.STUDENT.HOMEWORK_MATERIALS,
         icon: BookOpen,
         color: "text-accent-arts"
       },
       {
         title: "Announcements",
-        href: ROUTES.PARENT.ANNOUNCEMENTS,
+        href: ROUTES.STUDENT.ANNOUNCEMENTS,
         icon: Bell,
         color: "text-primary"
       },
       {
         title: "Appointments",
-        href: ROUTES.PARENT.APPOINTMENTS,
+        href: ROUTES.STUDENT.APPOINTMENTS,
         icon: Calendar,
         color: "text-primary"
       },
       {
         title: "Fees & Payments",
-        href: ROUTES.PARENT.FEES,
+        href: ROUTES.STUDENT.FEES,
         icon: CreditCard,
         color: "text-success"
       },
       {
         title: "Messages",
-        href: ROUTES.PARENT.MESSAGES,
+        href: ROUTES.STUDENT.MESSAGES,
         icon: MessageSquare,
         color: "text-info"
       },
       {
         title: "Calendar",
-        href: ROUTES.PARENT.CALENDAR,
+        href: ROUTES.STUDENT.CALENDAR,
         icon: Calendar,
         color: "text-accent-math"
       }

@@ -61,15 +61,15 @@ const teacherNavItems = [
 ];
 
 const parentNavItems = [
-  { title: 'Dashboard', href: ROUTES.PARENT.HOME, icon: LayoutDashboard },
-  { title: 'Attendance', href: ROUTES.PARENT.ATTENDANCE, icon: ClipboardCheck },
-  { title: 'Marks & Results', href: ROUTES.PARENT.MARKS, icon: GraduationCap },
-  { title: 'Homework & Materials', href: ROUTES.PARENT.HOMEWORK, icon: FileText },
-  { title: 'Announcements', href: ROUTES.PARENT.ANNOUNCEMENTS, icon: Megaphone },
-  { title: 'Appointments', href: ROUTES.PARENT.APPOINTMENTS, icon: CalendarDays },
-  { title: 'Fees & Payments', href: ROUTES.PARENT.FEES, icon: DollarSign },
-  { title: 'Messages', href: ROUTES.PARENT.MESSAGES, icon: MessageSquare },
-  { title: 'Calendar', href: ROUTES.PARENT.CALENDAR, icon: Calendar },
+  { title: 'Dashboard', href: ROUTES.STUDENT.HOME, icon: LayoutDashboard },
+  { title: 'Attendance', href: ROUTES.STUDENT.ATTENDANCE, icon: ClipboardCheck },
+  { title: 'Marks & Results', href: ROUTES.STUDENT.MARKS, icon: GraduationCap },
+  { title: 'Homework & Materials', href: ROUTES.STUDENT.HOMEWORK_MATERIALS, icon: FileText },
+  { title: 'Announcements', href: ROUTES.STUDENT.ANNOUNCEMENTS, icon: Megaphone },
+  { title: 'Appointments', href: ROUTES.STUDENT.APPOINTMENTS, icon: CalendarDays },
+  { title: 'Fees & Payments', href: ROUTES.STUDENT.FEES, icon: DollarSign },
+  { title: 'Messages', href: ROUTES.STUDENT.MESSAGES, icon: MessageSquare },
+  { title: 'Calendar', href: ROUTES.STUDENT.CALENDAR, icon: Calendar },
 ];
 
 export const Sidebar = ({ className }: SidebarProps) => {
