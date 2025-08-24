@@ -12,6 +12,7 @@ import { getPortalHome, canAccessRoute } from "@/utils/routes";
 // Portal Pages
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminUsersPage from "./pages/admin/AdminUsersPage";
+import { AdminAssessmentsPage } from "./pages/admin/AdminAssessmentsPage";
 import TeacherDashboard from "./pages/teacher/TeacherDashboard";
 import TeacherHomeworkPage from "./pages/teacher/TeacherHomeworkPage";
 import ParentDashboard from "./pages/parent/ParentDashboard";
@@ -132,7 +133,7 @@ const App = () => (
               <RouteGuard path="/admin/assessments">
                 <ProtectedRoute allowedRoles={['ADMIN']}>
                   <PortalLayout>
-                    <PlaceholderPage title="Assessments Management" description="Oversee assessments and evaluations" />
+                    <AdminAssessmentsPage />
                   </PortalLayout>
                 </ProtectedRoute>
               </RouteGuard>
