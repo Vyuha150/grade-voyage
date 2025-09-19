@@ -1,4 +1,4 @@
-export type UserRole = 'ADMIN' | 'TEACHER' | 'STUDENT' | 'PARENT';
+export type UserRole = 'ADMIN' | 'TEACHER' | 'PARENT';
 
 // Centralized route registry for type safety and link integrity
 export const ROUTES = {
@@ -67,10 +67,8 @@ export const getPortalHome = (role: UserRole): string => {
       return ROUTES.ADMIN.HOME;
     case 'TEACHER':
       return ROUTES.TEACHER.HOME;
-    case 'STUDENT':
-      return ROUTES.STUDENT.HOME;
     case 'PARENT':
-      return ROUTES.STUDENT.HOME; // Parents use student portal for now
+      return ROUTES.STUDENT.HOME; // Parents use student portal
     default:
       return ROUTES.PUBLIC.HOME;
   }
@@ -80,7 +78,7 @@ export const getPortalHome = (role: UserRole): string => {
 export const getRoutePortal = (path: string): UserRole | null => {
   if (path.startsWith('/admin')) return 'ADMIN';
   if (path.startsWith('/teacher')) return 'TEACHER';
-  if (path.startsWith('/student')) return 'STUDENT';
+  if (path.startsWith('/student')) return 'PARENT'; // Student routes are handled by PARENT role
   return null; // Public route
 };
 
@@ -93,7 +91,7 @@ export const canAccessRoute = (path: string, userRole: UserRole): boolean => {
   
   // Users can only access their own portal
   // Parents can access student portal
-  if (userRole === 'PARENT' && portal === 'STUDENT') return true;
+  if (userRole === 'PARENT' && path.startsWith('/student')) return true;
   
   return portal === userRole;
 };
@@ -105,7 +103,6 @@ export const getPortalRoutes = (role: UserRole) => {
       return Object.values(ROUTES.ADMIN);
     case 'TEACHER':
       return Object.values(ROUTES.TEACHER);
-    case 'STUDENT':
     case 'PARENT':
       return Object.values(ROUTES.STUDENT);
     default:

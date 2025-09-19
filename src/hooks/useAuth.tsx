@@ -3,7 +3,7 @@ import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
-export type UserRole = 'ADMIN' | 'TEACHER' | 'STUDENT' | 'PARENT';
+export type UserRole = 'ADMIN' | 'TEACHER' | 'PARENT';
 
 export interface UserProfile {
   id: string;
@@ -265,6 +265,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         title: 'Demo Login Successful',
         description: `Welcome to the ${role} portal!`,
       });
+      
+      // Redirect to appropriate portal
+      setTimeout(() => {
+        window.location.href = role === 'ADMIN' ? '/admin' : role === 'TEACHER' ? '/teacher' : '/student';
+      }, 1000);
     } catch (error) {
       console.error('Demo login error:', error);
       toast({

@@ -19,6 +19,9 @@ import { AdminAssessmentsPage } from "./pages/admin/AdminAssessmentsPage";
 import TeacherDashboard from "./pages/teacher/TeacherDashboard";
 import TeacherHomeworkPage from "./pages/teacher/TeacherHomeworkPage";
 
+// Student pages (using default imports)
+import StudentDashboard from "./pages/student/StudentDashboard";
+
 // Route Guard Component
 const RouteGuard = ({ children, path }: { children: React.ReactNode; path: string }) => {
   const { profile } = useAuth();
@@ -276,63 +279,63 @@ const App = () => (
       {/* Student Portal Routes */}
       <Route path={ROUTES.STUDENT.HOME} element={
         <RouteGuard path={ROUTES.STUDENT.HOME}>
-          <ProtectedRoute allowedRoles={['STUDENT', 'PARENT']}>
-            <PortalLayout><PlaceholderPage title="Student Dashboard" description="Your academic overview" /></PortalLayout>
+          <ProtectedRoute allowedRoles={['PARENT']}>
+            <PortalLayout><StudentDashboard /></PortalLayout>
           </ProtectedRoute>
         </RouteGuard>
       } />
       <Route path={ROUTES.STUDENT.ATTENDANCE} element={
         <RouteGuard path={ROUTES.STUDENT.ATTENDANCE}>
-          <ProtectedRoute allowedRoles={['STUDENT', 'PARENT']}>
+          <ProtectedRoute allowedRoles={['PARENT']}>
             <PortalLayout><PlaceholderPage title="Attendance" description="View attendance records" /></PortalLayout>
           </ProtectedRoute>
         </RouteGuard>
       } />
       <Route path={ROUTES.STUDENT.MARKS} element={
         <RouteGuard path={ROUTES.STUDENT.MARKS}>
-          <ProtectedRoute allowedRoles={['STUDENT', 'PARENT']}>
+          <ProtectedRoute allowedRoles={['PARENT']}>
             <PortalLayout><PlaceholderPage title="Marks & Results" description="View grades and reports" /></PortalLayout>
           </ProtectedRoute>
         </RouteGuard>
       } />
       <Route path={ROUTES.STUDENT.HOMEWORK_MATERIALS} element={
         <RouteGuard path={ROUTES.STUDENT.HOMEWORK_MATERIALS}>
-          <ProtectedRoute allowedRoles={['STUDENT', 'PARENT']}>
+          <ProtectedRoute allowedRoles={['PARENT']}>
             <PortalLayout><PlaceholderPage title="Homework & Materials" description="Access assignments and resources" /></PortalLayout>
           </ProtectedRoute>
         </RouteGuard>
       } />
       <Route path={ROUTES.STUDENT.ANNOUNCEMENTS} element={
         <RouteGuard path={ROUTES.STUDENT.ANNOUNCEMENTS}>
-          <ProtectedRoute allowedRoles={['STUDENT', 'PARENT']}>
+          <ProtectedRoute allowedRoles={['PARENT']}>
             <PortalLayout><PlaceholderPage title="Announcements" description="School and class announcements" /></PortalLayout>
           </ProtectedRoute>
         </RouteGuard>
       } />
       <Route path={ROUTES.STUDENT.APPOINTMENTS} element={
         <RouteGuard path={ROUTES.STUDENT.APPOINTMENTS}>
-          <ProtectedRoute allowedRoles={['STUDENT', 'PARENT']}>
+          <ProtectedRoute allowedRoles={['PARENT']}>
             <PortalLayout><PlaceholderPage title="Appointments" description="Schedule meetings with teachers" /></PortalLayout>
           </ProtectedRoute>
         </RouteGuard>
       } />
       <Route path={ROUTES.STUDENT.FEES} element={
         <RouteGuard path={ROUTES.STUDENT.FEES}>
-          <ProtectedRoute allowedRoles={['STUDENT', 'PARENT']}>
+          <ProtectedRoute allowedRoles={['PARENT']}>
             <PortalLayout><PlaceholderPage title="Fees & Payments" description="Manage school fees and payments" /></PortalLayout>
           </ProtectedRoute>
         </RouteGuard>
       } />
       <Route path={ROUTES.STUDENT.MESSAGES} element={
         <RouteGuard path={ROUTES.STUDENT.MESSAGES}>
-          <ProtectedRoute allowedRoles={['STUDENT', 'PARENT']}>
+          <ProtectedRoute allowedRoles={['PARENT']}>
             <PortalLayout><PlaceholderPage title="Messages" description="Communicate with teachers" /></PortalLayout>
           </ProtectedRoute>
         </RouteGuard>
       } />
       <Route path={ROUTES.STUDENT.CALENDAR} element={
         <RouteGuard path={ROUTES.STUDENT.CALENDAR}>
-          <ProtectedRoute allowedRoles={['STUDENT', 'PARENT']}>
+          <ProtectedRoute allowedRoles={['PARENT']}>
             <PortalLayout><PlaceholderPage title="Calendar" description="View school calendar and events" /></PortalLayout>
           </ProtectedRoute>
         </RouteGuard>
