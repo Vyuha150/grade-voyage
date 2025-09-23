@@ -1204,12 +1204,16 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: string
       }
+      is_class_teacher_for_student: {
+        Args: { student_uuid: string }
+        Returns: boolean
+      }
     }
     Enums: {
       appointment_status: "PENDING" | "CONFIRMED" | "COMPLETED" | "CANCELLED"
       complaint_status: "OPEN" | "IN_PROGRESS" | "RESOLVED" | "CLOSED"
       payment_status: "PENDING" | "COMPLETED" | "FAILED" | "REFUNDED"
-      user_role: "ADMIN" | "TEACHER" | "PARENT"
+      user_role: "ADMIN" | "TEACHER" | "PARENT" | "STUDENT"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -1340,7 +1344,7 @@ export const Constants = {
       appointment_status: ["PENDING", "CONFIRMED", "COMPLETED", "CANCELLED"],
       complaint_status: ["OPEN", "IN_PROGRESS", "RESOLVED", "CLOSED"],
       payment_status: ["PENDING", "COMPLETED", "FAILED", "REFUNDED"],
-      user_role: ["ADMIN", "TEACHER", "PARENT"],
+      user_role: ["ADMIN", "TEACHER", "PARENT", "STUDENT"],
     },
   },
 } as const
