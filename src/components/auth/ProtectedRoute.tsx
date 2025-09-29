@@ -3,6 +3,7 @@ import { useAuth, UserRole } from '@/hooks/useAuth';
 import { DemoLogin } from './DemoLogin';
 import { Loader2 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+import { Navigate } from 'react-router-dom';
 
 interface ProtectedRouteProps {
   children: ReactNode;
@@ -31,21 +32,7 @@ export const ProtectedRoute = ({ children, allowedRoles }: ProtectedRouteProps) 
 
   // Check role access if specific roles are required
   if (allowedRoles && !allowedRoles.includes(profile.role)) {
-    return (
-      <div className="min-h-screen flex items-center justify-center p-4">
-        <Card className="max-w-md w-full">
-          <CardContent className="text-center p-6">
-            <h2 className="text-lg font-semibold mb-2">Access Denied</h2>
-            <p className="text-muted-foreground mb-4">
-              You don't have permission to access this portal.
-            </p>
-            <p className="text-sm text-muted-foreground">
-              Your role: <span className="font-medium">{profile.role}</span>
-            </p>
-          </CardContent>
-        </Card>
-      </div>
-    );
+    return <Navigate to="/403" replace />;
   }
 
   return <>{children}</>;
